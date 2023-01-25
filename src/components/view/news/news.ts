@@ -1,7 +1,22 @@
 import './news.css';
 
+export interface ISorce {
+    id: string;
+    name: string;
+}
+
+interface INews {
+    author: string;
+    source: ISorce;
+    title: string;
+    description: string;
+    url: string;
+    urlToImage: string;
+    publishedAt: string;
+}
+
 class News {
-    draw(data) {
+    draw(data: INews[]): void {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
@@ -30,8 +45,9 @@ class News {
             fragment.append(newsClone);
         });
 
-        document.querySelector('.news').innerHTML = '';
-        document.querySelector('.news').appendChild(fragment);
+        const newsEl = document.querySelector('.news') as HTMLElement;
+        newsEl.innerHTML = '';
+        newsEl.appendChild(fragment);
     }
 }
 

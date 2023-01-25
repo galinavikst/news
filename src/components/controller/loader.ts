@@ -1,4 +1,16 @@
+interface ILoader {
+    baseLink: string;
+    readonly options: { apikey: string };
+    getResp(endpoint: string, options: {}, callback: Function): void;
+    errorHandler(res: any): Object;
+    makeUrl(options: any, endpoint: string): string;
+    load(method: string, endpoint: string, callback: Function, options: any): void;
+}
+
 class Loader {
+    baseLink: string;
+    options: { apikey: string };
+
     constructor(baseLink, options) {
         this.baseLink = baseLink;
         this.options = options;
@@ -34,7 +46,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: any, callback: { (): void; (arg0: any): any }, options = {}) {
+    load(method: string, endpoint: string, callback: { (): void; (arg0: any): any }, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

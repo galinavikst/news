@@ -1,6 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-require("./sources.css");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+require('./sources.css');
 class Sources {
     draw(data) {
         const fragment = document.createDocumentFragment();
