@@ -7,7 +7,12 @@ export interface IDrawNews {
     articles: INews[];
 }
 
-type DrawSourcesType = {
+export interface IDrawSources {
+    status: string;
+    sources: DrawSourcesType<string>[];
+}
+
+type DrawSourcesType<T> = {
     category: string;
     country: string;
     description: string;
@@ -17,10 +22,6 @@ type DrawSourcesType = {
     url: string;
 };
 
-export interface IDrawSources {
-    status: string;
-    sources: DrawSourcesType[];
-}
 export class AppView {
     news: News;
     sources: Sources;
@@ -29,12 +30,12 @@ export class AppView {
         this.sources = new Sources();
     }
 
-    drawNews(data: IDrawNews) {
+    drawNews(data: IDrawNews): void {
         const values = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data: IDrawSources) {
+    drawSources(data: IDrawSources): void {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }

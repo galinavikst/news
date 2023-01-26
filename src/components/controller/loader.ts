@@ -1,52 +1,68 @@
-interface ILoader {
-    baseLink: string;
-    readonly options: { apikey: string };
-    getResp(endpoint: string, options: {}, callback: Function): void;
-    errorHandler(res: any): Object;
-    makeUrl(options: any, endpoint: string): string;
-    load(method: string, endpoint: string, callback: Function, options: any): void;
+type ApiKeyType = {
+    readonly apiKey: string;
+    [apiKey: number]: string;
+};
+
+type OptionsType = {} | SourcesType;
+type SourcesType = Partial<ApiKeyType>;
+
+enum ResStatus {
+    NotLogged = 401,
+    NotFound = 404,
+}
+
+interface IGetResp {
+    endpoint: string;
+    options?: OptionsType;
+}
+interface IResponse {
+    json(): void;
+    ok: boolean;
+    status: ResStatus;
+    statusText: string | undefined;
+    url: string;
+    redirected?: boolean;
 }
 
 class Loader {
     baseLink: string;
-    options: { apikey: string };
+    options: ApiKeyType;
 
-    constructor(baseLink, options) {
+    constructor(baseLink: string, options: ApiKeyType) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     getResp(
-        { endpoint, options = {} },
-        callback = () => {
+        { endpoint, options = {} }: IGetResp,
+        callback = (): void => {
             console.error('No callback for GET response');
         }
     ) {
         this.load('GET', endpoint, callback, options);
     }
 
-    errorHandler(res: { json(): any; ok: any; status: number; statusText: string | undefined }) {
+    private errorHandler(res: IResponse): IResponse {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
-
         return res;
     }
 
-    makeUrl(options: {}, endpoint: any) {
+    private makeUrl(options: OptionsType, endpoint: string): string {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
-        Object.keys(urlOptions).forEach((key) => {
-            url += `${key}=${urlOptions[key]}&`;
+        Object.keys(urlOptions).forEach((key, i) => {
+            url += `${key}=${urlOptions[i]}&`;
         });
 
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: { (): void; (arg0: any): any }, options = {}) {
+    load(method: string, endpoint: string, callback: Function, options: OptionsType): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
