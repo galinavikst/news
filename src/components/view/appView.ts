@@ -7,7 +7,7 @@ export interface IDrawNews {
     articles: INews[];
 }
 
-type Isources = {
+type DrawSourcesType = {
     category: string;
     country: string;
     description: string;
@@ -19,7 +19,7 @@ type Isources = {
 
 export interface IDrawSources {
     status: string;
-    sources: Isources[];
+    sources: DrawSourcesType[];
 }
 export class AppView {
     news: News;
