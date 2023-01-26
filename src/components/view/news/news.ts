@@ -5,7 +5,7 @@ export interface ISorce {
     name: string;
 }
 
-interface INews {
+export interface INews {
     author: string;
     source: ISorce;
     title: string;
