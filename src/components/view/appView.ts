@@ -12,7 +12,7 @@ export interface IDrawSources {
     sources: DrawSourcesType<string>[];
 }
 
-type DrawSourcesType<T> = {
+export type DrawSourcesType<T> = {
     category: string;
     country: string;
     description: string;
@@ -30,12 +30,12 @@ export class AppView {
         this.sources = new Sources();
     }
 
-    drawNews(data: IDrawNews): void {
+    drawNews(data?: IDrawNews): void {
         const values = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data: IDrawSources): void {
+    drawSources(data?: IDrawSources): void {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }

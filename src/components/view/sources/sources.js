@@ -1,6 +1,6 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-require('./sources.css');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./sources.css");
 class Sources {
     draw(data) {
         const fragment = document.createDocumentFragment();
@@ -11,7 +11,8 @@ class Sources {
             sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
             fragment.append(sourceClone);
         });
-        document.querySelector('.sources').append(fragment);
+        const source = document.querySelector('.sources');
+        source.append(fragment);
     }
 }
 exports.default = Sources;

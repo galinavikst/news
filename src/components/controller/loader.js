@@ -1,18 +1,19 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var ResStatus;
+(function (ResStatus) {
+    ResStatus[ResStatus["NotLogged"] = 401] = "NotLogged";
+    ResStatus[ResStatus["NotFound"] = 404] = "NotFound";
+    ResStatus[ResStatus["Ok"] = 200] = "Ok";
+})(ResStatus || (ResStatus = {}));
 class Loader {
     constructor(baseLink, options) {
         this.baseLink = baseLink;
         this.options = options;
     }
-    getResp(
-        { endpoint, options = {} },
-        callback = () => {
-            console.error('No callback for GET response');
-        }
-    ) {
-        // console.log(endpoint, typeof endpoint);
-        // console.log(options);
+    getResp({ endpoint, options = {} }, callback = () => {
+        console.error('No callback for GET response');
+    }) {
         this.load('GET', endpoint, callback, options);
     }
     errorHandler(res) {
@@ -27,12 +28,11 @@ class Loader {
         const urlOptions = Object.assign(Object.assign({}, this.options), options);
         let url = `${this.baseLink}${endpoint}?`;
         Object.keys(urlOptions).forEach((key) => {
-            console.log(Object.keys(urlOptions), i, typeof key);
             url += `${key}=${urlOptions[key]}&`;
         });
         return url.slice(0, -1);
     }
-    load(method, endpoint, callback, options = {}) {
+    load(method, endpoint, callback, options) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
