@@ -14,7 +14,7 @@ class Sources {
         });
         const source = document.querySelector('.sources');
         source.append(fragment);
-        (0, search_1.input)();
+        (0, search_1.inputSearch)();
     }
 }
 exports.default = Sources;

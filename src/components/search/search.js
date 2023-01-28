@@ -1,15 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.input = void 0;
-function input() {
+exports.inputSearch = void 0;
+function inputSearch() {
     const input = document.querySelector('input');
     const buttonsArr = document.querySelectorAll('.source__item-name');
     input.addEventListener('input', (e) => {
-        const inputElement = e.target;
-        let inputValue = inputElement.value.toLowerCase();
+        let inputValue = e.target.value.toLowerCase();
         buttonsArr.forEach((el) => {
-            const span = el;
-            const itemName = span.innerHTML.toLowerCase();
+            const itemName = el.innerHTML.toLowerCase();
             const sourcesButton = el.parentElement;
             if (!itemName.includes(inputValue)) {
                 sourcesButton.style.display = 'none';
@@ -20,4 +18,4 @@ function input() {
         });
     });
 }
-exports.input = input;
+exports.inputSearch = inputSearch;
