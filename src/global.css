@@ -14,6 +14,17 @@ header h1 {
     text-align: center;
 }
 
+input {
+    display: block;
+    width: 25em;
+    margin: 0 auto 2em;
+    padding: 0.8em;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 1px;
+}
+
 footer {
     height: 100px;
     display: flex;
@@ -39,11 +50,18 @@ footer .copyright a,
 footer .copyright a:hover {
     color: #555;
 }
+
 footer .copyright:before {
     content: '©';
 }
 
 @media (max-width: 530px) {
+    header h1 {
+        font-size: 30px;
+    }
+    input {
+        width: 50%;
+    }
     footer {
         flex-direction: column;
     }
