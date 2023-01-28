@@ -1,5 +1,6 @@
 import './sources.css';
 import { ISorce } from '../news/news';
+import { input } from '../../search/search';
 
 class Sources {
     draw(data: ISorce<string>[]): void {
@@ -17,6 +18,8 @@ class Sources {
 
         const source = document.querySelector('.sources') as HTMLElement;
         source.append(fragment);
+
+        input();
     }
 }
 

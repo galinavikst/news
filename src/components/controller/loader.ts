@@ -14,20 +14,6 @@ interface IGetResp {
     options?: OptionsType;
 }
 
-// enum ResStatus {
-//     NotLogged = 401,
-//     NotFound = 404,
-//     Ok = 200,
-// }
-
-// interface IResponse {
-//     ok: boolean;
-//     status: ResStatus;
-//     statusText: string | undefined;
-//     url: string;
-//     redirected?: boolean;
-// }
-
 class Loader {
     baseLink: string;
     options: ApiKeyType;

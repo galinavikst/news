@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./sources.css");
+const search_1 = require("../../search/search");
 class Sources {
     draw(data) {
         const fragment = document.createDocumentFragment();
@@ -13,6 +14,7 @@ class Sources {
         });
         const source = document.querySelector('.sources');
         source.append(fragment);
+        (0, search_1.input)();
     }
 }
 exports.default = Sources;
